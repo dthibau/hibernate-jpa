@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.ejb.HibernateEntityManager;
+import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
 
 import formation.hib.tp9.dao.DBHelper;
 import formation.hib.tp9.metier.Departement;
@@ -19,7 +20,7 @@ import formation.hib.tp9.metier.Departement;
 public class TP9_1Tests extends TestCase {
 	
 	private void _printCacheRegionStatistiques(String regionName) {
-		Map cacheEntries = ((org.hibernate.ejb.EntityManagerFactoryImpl)DBHelper.getFactory()).getSessionFactory().getStatistics()
+		Map cacheEntries = ((EntityManagerFactoryBuilderImpl)DBHelper.getFactory()).getSessionFactory().getStatistics()
 				.getSecondLevelCacheStatistics(regionName)
 				.getEntries();
 		System.out.println(cacheEntries);

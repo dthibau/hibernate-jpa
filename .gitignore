@@ -2,3 +2,6 @@ MyWork/
 *.odp
 *.odt
 *#
+.project
+.settings/
+.classpath

@@ -1,0 +1,29 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>	
+		<property name="connection.driver_class">
+		    com.mysql.cj.jdbc.Driver
+		</property>
+		<property name="hibernate.connection.url">
+		    jdbc:mysql://localhost/ssii?serverTimezone=UTC
+		</property>
+		<property name="hibernate.connection.username">
+		    root
+		</property>
+		<property name="hibernate.connection.password">
+		    root
+		</property>
+		<property name="hibernate.dialect">
+		org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="show_sql">
+		    true
+		</property>
+		
+		<mapping resource="formation/hib/tp2/metier/Employe.hbm.xml"/>
+		<mapping resource="formation/hib/tp2/metier/Departement.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

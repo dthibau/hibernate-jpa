@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package="formation.hib.tp4.metier">
+  	<class name="Mission" table="tmission">
+       <id  name="id" column="id" access="field">
+          <generator class="native"/>
+       </id>
+       <property name="libelle" column="libelle"/>     
+       <property name="debut" column="debut"/>    
+       <property name="fin" column="fin"/> 
+       
+       <joined-subclass name="Formation" table="tformation">
+          <key column="ID"/>
+          <property name="cours" column="cours"/>
+       </joined-subclass>
+       
+       <joined-subclass name="Regie" table="tregie">
+          <key column="IdRegie"/>
+          <property name="taux" column="taux"/>
+       </joined-subclass>
+       
+       <joined-subclass name="Forfait" table="tforfait">
+          <key column="IdForfait"/>
+          <property name="prix" column="prix"/>
+          <property name="projet" column="projet"/>
+       </joined-subclass>
+       
+	</class>
+</hibernate-mapping>

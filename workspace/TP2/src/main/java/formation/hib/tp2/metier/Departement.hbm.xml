@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package="formation.hib.tp2.metier">
+  	<class name="Departement" table="tdpt">
+       <id  name="id" column="id" access="field">
+          <generator class="native"/>
+       </id>
+       <property name="nom" column="nom"/>     
+       <property name="code" column="code"/>    
+       <set name="employes"  lazy="false" access="field">
+          <key column="IDDpt"/>
+          <one-to-many class="Employe"/>
+       </set>
+	</class>
+</hibernate-mapping>

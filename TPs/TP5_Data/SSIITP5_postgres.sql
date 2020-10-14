@@ -24,7 +24,7 @@ CREATE TABLE tdpt (
 
 
 CREATE TABLE temploye (
-  Id bigint NOT NULL ,
+  Id serial ,
   nom varchar(40) NOT NULL default '',
   email varchar(30) default NULL,
   tel varchar(30) default NULL,
@@ -89,10 +89,10 @@ INSERT INTO tdpt VALUES('1','E-Technologies','etch');
 INSERT INTO tdpt VALUES('2','Services tertiaires','ster');
 INSERT INTO tdpt VALUES('3','Administration','adm');
 
-INSERT INTO temploye VALUES('1','Jean Dupond','jd@plb.fr','01.41.21.61.25','2010-11-29','HOMME','1');
-INSERT INTO temploye VALUES('2','Marianne Predaut','mp@plb.fr','01.41.21.61.32','2010-11-29','FEMME','1');
-INSERT INTO temploye VALUES('3','Henri Prevost','hp@plb.fr','01.41.21.61.47','2010-11-29','HOMME','1');
-INSERT INTO temploye VALUES('4','Eric Dardaine','e','01.41.21.61.47','2010-11-29','HOMME','2');
+INSERT INTO temploye(nom,email,tel,entree,genre,IDDpt) VALUES ('Jean Dupond','jd@plb.fr','01.41.21.61.25','2010-11-29','HOMME','1');
+INSERT INTO temploye(nom,email,tel,entree,genre,IDDpt) VALUES('Marianne Predaut','mp@plb.fr','01.41.21.61.32','2010-11-29','FEMME','1');
+INSERT INTO temploye (nom,email,tel,entree,genre,IDDpt) VALUES('Henri Prevost','hp@plb.fr','01.41.21.61.47','2010-11-29','HOMME','1');
+INSERT INTO temploye (nom,email,tel,entree,genre,IDDpt) VALUES('Eric Dardaine','e','01.41.21.61.47','2010-11-29','HOMME','2');
 
 INSERT INTO tmission VALUES('1','Formation CASA','2004-06-21','2004-07-10','1');
 INSERT INTO tmission VALUES('2','Audit Mthode projet TRANS','2004-07-01','2004-10-15','1');

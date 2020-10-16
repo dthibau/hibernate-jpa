@@ -2,7 +2,6 @@ package formation.hib.tp7.metier;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tposte")
 public class Poste {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue
 	private Long id;
 	@ManyToOne @JoinColumn(name="IdEmp")
 	private Employe emp;

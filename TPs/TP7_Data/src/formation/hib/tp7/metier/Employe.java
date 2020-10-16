@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,7 +20,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="temploye")
 public class Employe {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue
 	private Long id;
 	private String nom;
 	@Embedded

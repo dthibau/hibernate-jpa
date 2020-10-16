@@ -75,7 +75,7 @@ CREATE TABLE tregie (
 
 
 CREATE TABLE ttache (
-  ID bigint NOT NULL ,
+  Id bigserial ,
   libelle varchar(30) default NULL,
   charge int default NULL,
   IDForfait bigint default NULL,
@@ -107,9 +107,9 @@ INSERT INTO tposte (charge,libelle,description,IdEmp,idMission) VALUES('5','Anim
 INSERT INTO tposte (charge,libelle,description,IdEmp,idMission) VALUES('2','Consultant','Aide à la spécification','1','1');
 INSERT INTO tposte (charge,libelle,description,IdEmp,idMission) VALUES('2','Resp. qualité','Tests, procédures, méthodologies','2','3');
 
-INSERT INTO ttache VALUES('1','Analyse','2','3');
-INSERT INTO ttache VALUES('2','Production','20','3');
-INSERT INTO ttache VALUES('3','Tests','10','3');
+INSERT INTO ttache (libelle, charge, idforfait) VALUES('Analyse','2','3');
+INSERT INTO ttache (libelle, charge, idforfait) VALUES('Production','20','3');
+INSERT INTO ttache (libelle, charge, idforfait) VALUES('Tests','10','3');
 
 
 

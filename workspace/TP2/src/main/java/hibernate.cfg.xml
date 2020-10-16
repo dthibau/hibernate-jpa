@@ -16,9 +16,9 @@
 		<property name="hibernate.connection.password">
 		    root
 		</property>
-		<property name="hibernate.dialect">
-		org.hibernate.dialect.MySQLDialect
-		</property>
+<!-- 		<property name="hibernate.dialect"> -->
+<!-- 		org.hibernate.dialect.MySQLDialect -->
+<!-- 		</property> -->
 		<property name="show_sql">
 		    true
 		</property>

@@ -46,9 +46,10 @@ public class TP7_1Tests extends TestCase {
 		EntityManager em = DBHelper.getFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-//		Query hqlQuery = em.createQuery("select distinct emp from Employe emp join emp.postes p where p.mission.libelle = :libMission");
-		Query hqlQuery = em.createQuery("select p.emp from Poste p where p.mission.libelle = :libMission");
-		hqlQuery.setParameter("libMission","Formation CASA");
+		
+		Query hqlQuery = em.createQuery(" from Employe emp inner join emp.postes poste where poste.mission.libelle = :libelle");
+		hqlQuery.setParameter("libelle", "Formation CASA");
+		
 		@SuppressWarnings("unchecked")
 		List<Employe> l =  (List<Employe>)hqlQuery.getResultList();
 		assertNotNull(l);

@@ -24,7 +24,7 @@ CREATE TABLE tdpt (
 
 
 CREATE TABLE temploye (
-  Id serial ,
+  Id bigserial ,
   nom varchar(40) NOT NULL default '',
   email varchar(30) default NULL,
   tel varchar(30) default NULL,
@@ -36,7 +36,7 @@ CREATE TABLE temploye (
 
 
 CREATE TABLE tforfait (
-  ID bigint default '0',
+  IDFORFAIT bigint default '0',
   prix int default NULL,
   projet varchar(100) default NULL
 ) ;
@@ -49,7 +49,7 @@ CREATE TABLE tformation (
 
 
 CREATE TABLE tmission (
-  ID bigint NOT NULL ,
+  ID bigserial ,
   libelle varchar(200) default NULL,
   debut date default NULL,
   fin date default NULL,
@@ -59,7 +59,7 @@ CREATE TABLE tmission (
 
 
 CREATE TABLE tposte (
-  Id bigint NOT NULL ,
+  Id bigserial ,
   charge float default NULL,
   libelle varchar(50) default NULL,
   description text,
@@ -94,18 +94,18 @@ INSERT INTO temploye(nom,email,tel,entree,genre,IDDpt) VALUES('Marianne Predaut'
 INSERT INTO temploye (nom,email,tel,entree,genre,IDDpt) VALUES('Henri Prevost','hp@plb.fr','01.41.21.61.47','2010-11-29','HOMME','1');
 INSERT INTO temploye (nom,email,tel,entree,genre,IDDpt) VALUES('Eric Dardaine','e','01.41.21.61.47','2010-11-29','HOMME','2');
 
-INSERT INTO tmission VALUES('1','Formation CASA','2004-06-21','2004-07-10','1');
-INSERT INTO tmission VALUES('2','Audit Mthode projet TRANS','2004-07-01','2004-10-15','1');
-INSERT INTO tmission VALUES('3','Forfait ILO','2004-04-01','2005-01-15','2');
+INSERT INTO tmission (libelle, debut, fin, IDClient) VALUES('Formation CASA','2004-06-21','2004-07-10','1');
+INSERT INTO tmission (libelle, debut, fin, IDClient) VALUES('Audit Mthode projet TRANS','2004-07-01','2004-10-15','1');
+INSERT INTO tmission (libelle, debut, fin, IDClient) VALUES('Forfait ILO','2004-04-01','2005-01-15','2');
 
 INSERT INTO tforfait VALUES('3','10000','ILO');
 INSERT INTO tformation VALUES('Modélisation Objet','2','1');
 
 INSERT INTO tregie VALUES('7','2');
 
-INSERT INTO tposte VALUES('1','5','Animateur','animer les sessions...','1','1');
-INSERT INTO tposte VALUES('2','2','Consultant','Aide à la spécification','1','1');
-INSERT INTO tposte VALUES('3','2','Resp. qualité','Tests, procédures, méthodologies','2','3');
+INSERT INTO tposte (charge,libelle,description,IdEmp,idMission) VALUES('5','Animateur','animer les sessions...','1','1');
+INSERT INTO tposte (charge,libelle,description,IdEmp,idMission) VALUES('2','Consultant','Aide à la spécification','1','1');
+INSERT INTO tposte (charge,libelle,description,IdEmp,idMission) VALUES('2','Resp. qualité','Tests, procédures, méthodologies','2','3');
 
 INSERT INTO ttache VALUES('1','Analyse','2','3');
 INSERT INTO ttache VALUES('2','Production','20','3');

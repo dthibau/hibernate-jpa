@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>	
+		<property name="connection.driver_class">
+		   org.postgresql.Driver
+		</property>
+		<property name="hibernate.connection.url">
+		    jdbc:postgresql://localhost:5434/ssii
+		</property>
+		<property name="hibernate.connection.username">
+		    postgres
+		</property>
+		<property name="hibernate.connection.password">
+		    postgres
+		</property>
+
+		<property name="show_sql">
+		  true
+		</property>
+		
+		<!-- TODO : Références vers fichier de mapping -->
+		<mapping resource="formation/hib/tp2/metier/Departement.hbm.xml"/>
+		<mapping resource="formation/hib/tp2/metier/Employe.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

@@ -47,11 +47,10 @@ public class TP3Tests extends TestCase {
 		EntityManager em = DBHelper.getFactory().createEntityManager();
 		Employe marin = (Employe)em.find(Employe.class,3l);
 		Departement adm = (Departement)em.find(Departement.class, 3l);
-		Set<Employe> lemp = dao.getEmployesDe("Administration");
 		dao.integrateEmploye(marin, adm );
 		
-		Set<Employe> afterEmp = dao.getEmployesDe("Administration");
+		Set<Employe> lemp = dao.getEmployesDe("Administration");
 		// si on part de la base intiale, ça doit être le 1er employé de ce département
-		assertEquals(afterEmp.size(),lemp.size()+1);
+		assertTrue(lemp.contains(marin));
 	}
 }

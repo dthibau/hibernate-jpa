@@ -20,9 +20,7 @@ public class TP4Tests extends TestCase {
 		System.out.println("2 - Le système affiche la liste des missions");
 		MissionDAO dao = new MissionDAO();
 		List<Mission> lMission = dao.getAllMissions();
-		for (Mission m : lMission) {
-			System.out.println(m.getId() + ") " + m.getLibelle());
-		}
+		lMission.stream().forEach(System.out::println);
 		assertEquals(lMission.isEmpty(), false);
 	}
 	
@@ -36,9 +34,7 @@ public class TP4Tests extends TestCase {
 		List<Mission> lMission = dao.getAllMissionsDeType(Regie.class);
 		for (Mission m : lMission) {
 			Regie current = (Regie)m;
-			System.out.println(current.getId() + ") " + current.getLibelle() + " "
-					+ current.getDebut() + "  " + 
-					current.getFin() + " de taux : " + current.getTaux());
+			System.out.println(current);
 		}
 		assertEquals(lMission.isEmpty(), false);
 	}

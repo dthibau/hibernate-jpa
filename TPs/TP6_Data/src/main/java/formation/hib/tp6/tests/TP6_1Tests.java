@@ -22,12 +22,11 @@ public class TP6_1Tests extends TestCase {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Query hqlQuery = em.createQuery("from Employe");
+		@SuppressWarnings("unchecked")
 		List<Employe> lEmp = (List<Employe>) hqlQuery.getResultList();
-		for (Employe e : lEmp) {
-			System.out.println(e.getId() + ") " + e.getNom() + " adresse -> "
-					+ e.getEmail() + " [" + (e.getEmail() != null ? e.getEmail().getDomainName() : "") + "]");
+		
+		lEmp.stream().forEach(System.out::println);
 
-		}
 		assertNotNull(lEmp);
 		tx.commit();
 		em.close();
@@ -48,7 +47,7 @@ public class TP6_1Tests extends TestCase {
 		em = DBHelper.getFactory().createEntityManager();
 		tx = em.getTransaction();
 		tx.begin();
-		e3 = em.find(Employe.class,new Long(3));
+		Employe e3 = em.find(Employe.class,3l);
 		assertEquals("newAdresse@plb.fr", e3.getEmail().getAdresse());
 		tx.commit();
 		em.close();
@@ -68,7 +67,7 @@ public class TP6_1Tests extends TestCase {
 		em = DBHelper.getFactory().createEntityManager();
 		tx = em.getTransaction();
 		tx.begin();
-		e3 = em.find(Employe.class,new Long(4));
+		Employe e3 = em.find(Employe.class,4l);
 		assertEquals("newAdresse@plb.fr", e3.getEmail().getAdresse());
 		tx.commit();
 		em.close();

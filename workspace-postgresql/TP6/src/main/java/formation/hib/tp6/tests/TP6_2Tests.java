@@ -163,7 +163,7 @@ public class TP6_2Tests extends TestCase {
 		tx.begin();
 		// A COMPLETER
 		// Suppression du forfait
-		Forfait f = em.find(Forfait.class, new Long(3));
+		Forfait f = em.find(Forfait.class, 4l);
 		em.remove(f);
 		tx.commit();
 		em.close();
@@ -171,7 +171,7 @@ public class TP6_2Tests extends TestCase {
 		em = DBHelper.getFactory().createEntityManager();
 		tx = em.getTransaction();
 		tx.begin();
-		f = em.find(Forfait.class, new Long(3));
+		f = em.find(Forfait.class, 4l);
 		assertNull(f);
 		tx.commit();
 		em.close();

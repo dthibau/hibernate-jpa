@@ -4,10 +4,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.formation</groupId>
-	<artifactId>tp1</artifactId>
+	<artifactId>tp5</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Delivery-service</name>
-	<description>Demo project for DevOps</description>
+	<name>Atelier5</name>
+	<description>Atelier Hibernate</description>
 
 	<properties>
 		<java.version>1.8</java.version>

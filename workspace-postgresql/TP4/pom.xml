@@ -6,7 +6,7 @@
 	<groupId>org.formation</groupId>
 	<artifactId>tp4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Atelier3</name>
+	<name>Atelier4</name>
 	<description>Atelier Hibernate</description>
 
 	<properties>

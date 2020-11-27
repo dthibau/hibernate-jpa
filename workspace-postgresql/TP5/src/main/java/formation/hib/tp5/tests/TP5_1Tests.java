@@ -114,7 +114,7 @@ public class TP5_1Tests extends TestCase {
 		tx = em.getTransaction();
 		tx.begin();
 		
-		Mission removedMission = (Mission)em.find(Mission.class,new Long(1));
+		Mission removedMission = (Mission)em.find(Mission.class,1l);
 		assertNull(removedMission);
 		tx.commit();
 		em.close();

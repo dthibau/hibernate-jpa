@@ -20,6 +20,12 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.4.22.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>

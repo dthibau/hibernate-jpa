@@ -2,6 +2,11 @@ package formation.hib.tp2.dao;
 
 public class DAOException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Exception nestedException;
 
 	private String code;

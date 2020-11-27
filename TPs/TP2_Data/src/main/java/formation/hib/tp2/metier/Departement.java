@@ -10,11 +10,9 @@ public class Departement {
 	// employes est l'attribut contenant les employés.
 	
 	public void integreEmploye(Employe e){
-		employes.add(e);
 	}
 	
 	public void retireEmploye(Employe e){
-		employes.remove(e);
 	}
 	
 	

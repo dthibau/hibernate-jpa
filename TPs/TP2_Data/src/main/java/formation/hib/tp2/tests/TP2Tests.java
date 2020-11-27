@@ -22,10 +22,9 @@ public class TP2Tests extends TestCase {
 		System.out.println("2 - Le systéme affiche la liste des employés");
 		DptDAO dao = new DptDAO();
 		Set<Employe> lEmp = dao.getEmployesDe("E-Technologies");
-		for (Employe e : lEmp) {
-			System.out.println(e.getId() + ") " + e.getNom() + "["
-					+ e.getEmail() + "]");
-		}
+
+		lEmp.stream().forEach(System.out::println);
+
 		assertEquals(lEmp.isEmpty(), false);
 	}
 	
@@ -36,8 +35,9 @@ public class TP2Tests extends TestCase {
 		DptDAO dao = new DptDAO(); 
 		Employe ne = dao.createEmploye("marin pecheur", "mpec@plb.fr","01.64.23.58.96" );
 		System.out.println("Employé créé : " + ne.getId());
+		
 		// si on part de la base intiale, ça doit étre le 3éme employé
-		assertEquals(new Long(ne.getId()),new Long(3));
+		assertTrue(ne.getId() > 0);
 	}
 	
 	public void testCUIntegrerEmployeDpt() throws Exception {
@@ -45,13 +45,16 @@ public class TP2Tests extends TestCase {
 		System.out.println("1 - L'utilisateur fournit sélectionne l'employé et le département ['marin pecheur', 'Administration'] ");
 		System.out.println("2 - Le systéme crée intégre l'employé dans le département");
 		DptDAO dao = new DptDAO(); 
+		
 		Session s = DBHelper.getFactory().openSession();
-		Employe marin = (Employe)s.get(Employe.class,new Long(3));
-		Departement adm = (Departement)s.get(Departement.class, new Long(3));
+		Employe marin = (Employe)s.get(Employe.class,3l);
+		Departement adm = (Departement)s.get(Departement.class, 3l);
+		Set<Employe> lemp = dao.getEmployesDe("Administration");
+		
 		dao.integrateEmploye(marin, adm );
 		
-		Set<Employe> lemp = dao.getEmployesDe("Administration");
-		// si on part de la base intiale, éa doit étre le 1er employé de ce département
-		assertEquals(lemp.size(),1);
+		Set<Employe> afterlemp = dao.getEmployesDe("Administration");
+		
+		assertEquals(afterlemp .size(),lemp.size()+1);
 	}
 }

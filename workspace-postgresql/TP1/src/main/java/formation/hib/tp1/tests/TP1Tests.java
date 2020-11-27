@@ -9,9 +9,9 @@ import junit.framework.TestCase;
 
 public class TP1Tests extends TestCase {
 	public void testCUConsulterListeEmployesDpt() throws Exception {
-		System.out.println("\nCU : Consulter liste des employ�s d'un d�partement");
-		System.out.println("1 - L'utilisateur fournit le nom du d�partement [E-Technologies] ");
-		System.out.println("2 - Le syst�me affiche la liste des employ�s");
+		System.out.println("\nCU : Consulter liste des employés d'un département");
+		System.out.println("1 - L'utilisateur fournit le nom du département [E-Technologies] ");
+		System.out.println("2 - Le système affiche la liste des employés");
 		DptDAO dao = new DptDAO(); 
 		List<Employe> lEmp = dao.getEmployesDe("E-Technologies");
 		for(Employe e : lEmp){
@@ -22,25 +22,27 @@ public class TP1Tests extends TestCase {
 	}
 	
 	public void testCUCreerUnEmploye() throws Exception {
-		System.out.println("\nCU : Cr�er un nouvel employ�");
-		System.out.println("1 - L'utilisateur fournit le nom , l'email, et le t�l�phone de l'employ� ['martin pecheur','mpec@tsystems.fr','01.64.23.58.96'] ");
-		System.out.println("2 - Le syst�me cr�e l'employe et affiche son ID");
+		System.out.println("\nCU : Créer un nouvel employé");
+		System.out.println("1 - L'utilisateur fournit le nom , l'email, et le téléphone de l'employé ['martin pecheur','mpec@tsystems.fr','01.64.23.58.96'] ");
+		System.out.println("2 - Le système crée l'employe et affiche son ID");
 		DptDAO dao = new DptDAO(); 
 		int id = dao.createEmploye("marin pecheur", "mpec@tsystems.fr","01.64.23.58.96" );
-		System.out.println("Employ� cr�� : " + id);
-		// si on part de la base initiale, �a doit �tre le 3�me employ�
-		assertEquals(id,3);
+		System.out.println("Employé créé : " + id);
+
+		assertTrue(id > 0);
 	}
 	
 	public void testCUIntegrerEmployeDpt() throws Exception {
-		System.out.println("\nCU : Int�grer un employ� dans un d�partement");
-		System.out.println("1 - L'utilisateur fournit l'id de l'employ� et le nom du d�partement [3, 'Administration'] ");
-		System.out.println("2 - Le syst�me cr�e int�gre l'employ� dans le d�partement");
+		System.out.println("\nCU : Intégrer un employé dans un département");
+		System.out.println("1 - L'utilisateur fournit l'id de l'employé et le nom du département [3, 'Administration'] ");
+		System.out.println("2 - Le système crée intègre l'employé dans le département");
+		
 		DptDAO dao = new DptDAO(); 
+		List<Employe> lemp = dao.getEmployesDe("Administration");
 		dao.integrateEmploye(3,"Administration" );
 		
-		List<Employe> lemp = dao.getEmployesDe("Administration");
-		// si on part de la base intiale, �a doit �tre le 1er employ� de ce d�partement
-		assertEquals(lemp.size(),1);
+		List<Employe> afterLemp = dao.getEmployesDe("Administration");
+
+		assertEquals(afterLemp.size(),lemp.size()+1);
 	}
 }

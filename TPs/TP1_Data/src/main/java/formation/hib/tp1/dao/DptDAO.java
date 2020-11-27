@@ -1,12 +1,9 @@
 package formation.hib.tp1.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import formation.hib.tp1.metier.Employe;
 
@@ -32,13 +29,11 @@ public class DptDAO {
 	public List<Employe> getEmployesDe(String nom) throws DAOException {
 		List<Employe> ret = new ArrayList<Employe>();
 		try {
+			Connection connection = DBHelper.getConnection();
 			//TODO récupérer l'ID du département
 			
 			// si on ne trouve pas de dpt, c'est une erreur !
-			if (rs.next()){
-				id = rs.getInt(ID);
-			}
-			else throw new DAOException(null,"dao.error.dpt.notfound");
+
 			
 			//TODO récupérer les employés dont l'id de Département a été récupéré
 		} catch (SQLException e) {

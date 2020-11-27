@@ -22,11 +22,10 @@ public class TP3Tests extends TestCase {
 		System.out.println("2 - Le systéme affiche la liste des employés");
 		DptDAO dao = new DptDAO();
 		Set<Employe> lEmp = dao.getEmployesDe("E-Technologies");
-//		for (Employe e : lEmp) {
-//			System.out.println(e.getId() + ") " + e.getNom() + "["
-//					+ e.getEmail() + "]");
-//		}
-//		assertEquals(lEmp.isEmpty(), false);
+		
+		lEmp.stream().forEach(System.out::println);
+
+		assertEquals(lEmp.isEmpty(), false);
 	}
 	
 	public void testCUCreerUnEmploye() throws Exception {
@@ -46,12 +45,12 @@ public class TP3Tests extends TestCase {
 		System.out.println("2 - Le systéme crée intégre l'employé dans le département");
 		DptDAO dao = new DptDAO(); 
 		EntityManager em = DBHelper.getFactory().createEntityManager();
-		Employe marin = (Employe)em.find(Employe.class,new Integer(3));
-		Departement adm = (Departement)em.find(Departement.class, new Long(3));
+		Employe marin = (Employe)em.find(Employe.class,3l);
+		Departement adm = (Departement)em.find(Departement.class, 3l);
 		dao.integrateEmploye(marin, adm );
 		
 		Set<Employe> lemp = dao.getEmployesDe("Administration");
 		// si on part de la base intiale, ça doit être le 1er employé de ce département
-		assertEquals(lemp.size(),1);
+		assertTrue(lemp.contains(marin));
 	}
 }

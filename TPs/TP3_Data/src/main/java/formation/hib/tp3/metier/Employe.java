@@ -52,6 +52,11 @@ public class Employe {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", nom=" + nom + ", email=" + email + ", telephone=" + telephone + ", entree="
+				+ entree + ", genre=" + genre + "]";
+	}
 	
 	
 }

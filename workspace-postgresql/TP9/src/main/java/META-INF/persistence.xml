@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Persistence deployment descriptor for dev profile -->
-<persistence xmlns="http://java.sun.com/xml/ns/persistence" 
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" 
-             version="1.0">
-             
-   <persistence-unit name="ssii">
-      <properties>
-      	<property name="connection.driver_class" value="org.gjt.mm.mysql.Driver"/>
-      	<property name="hibernate.connection.url" value="jdbc:mysql://localhost/ssii"/>
-      	<property name="hibernate.connection.username" value="root"/>
-      	<property name="hibernate.connection.password" value="root"/>
-         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-         <property name="hibernate.hbm2ddl.auto" value="update"/>
-         <property name="hibernate.show_sql" value="true"/>
-         <property name="hibernate.format_sql" value="false"/>
-        
-         
-      </properties>
-   </persistence-unit>
-    
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<persistence-unit name="ssii">
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5434/ssii" />
+			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5434/ssii-generated"/> -->
+			<property name="javax.persistence.jdbc.user"
+				value="postgres" />
+			<property name="javax.persistence.jdbc.password"
+				value="postgres" />
+
+			<!-- Ajouter les propriétés Hibernate nécessaires -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<!-- Cache -->
+			<property name="hibernate.cache.use_second_level_cache"
+				value="true" />
+			<property name="hibernate.cache.region.factory_class"
+				value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+			<property name="hibernate.generate_statistics" value="true"/>
+		</properties>
+	</persistence-unit>
+
 </persistence>

@@ -1,22 +1,29 @@
 package formation.hib.tp9.metier;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tforfait")
+@PrimaryKeyJoinColumn(name = "IDFORFAIT", referencedColumnName = "ID")
 public class Forfait extends Mission {
 	private int prix;
 
 	private String projet;
+	
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	@JoinColumn(name="IDFORFAIT")
+	@MapKey(name="libelle")
+	Map<String,Tache> taches = new HashMap<>();
 
-	@OneToMany(cascade=CascadeType.ALL ,mappedBy="forfait",orphanRemoval=true)
-	private List<Tache> taches = new ArrayList<Tache>();
 
 	public int getPrix() {
 		return prix;
@@ -34,18 +41,14 @@ public class Forfait extends Mission {
 		this.projet = projet;
 	}
 
-
-	public List<Tache> getTaches() {
+	public Map<String, Tache> getTaches() {
 		return taches;
 	}
 
-	public void setTaches(List<Tache> taches) {
+	public void setTaches(Map<String, Tache> taches) {
 		this.taches = taches;
 	}
-	
-	public void addTache(Tache t) {
-		taches.add(t);
-		t.setForfait(this);
-	}
+
+
 	
 }

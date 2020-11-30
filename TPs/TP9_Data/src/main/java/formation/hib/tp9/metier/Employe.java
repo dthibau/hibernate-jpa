@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,25 +22,27 @@ import javax.persistence.Version;
 @Entity
 @Table(name="temploye")
 public class Employe {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nom;
-	@Embedded
-	@AttributeOverride(name="adresse",
-	column=@Column(name="email"))
-	private Email email;
+	@Temporal(TemporalType.DATE)
+	private Date entree;
+	@Enumerated(EnumType.STRING)
+	private Genre genre;
+	
 	@Column(name="tel")
 	private String telephone;
 	@OneToMany(mappedBy="emp")
 	private Set<Poste> postes = new HashSet<Poste>();
-	@Temporal(TemporalType.DATE)
-	private Date entree;
-	@Enumerated(EnumType.STRING)
-	private Genre genre;		
+	
+	@Embedded
+	@AttributeOverride(name="adresse",
+	column=@Column(name="email"))
+	private Email email;
+	
 	@Version
 	private int version;
 	
-
 	public Set<Poste> getPostes() {
 		return postes;
 	}
@@ -50,14 +53,17 @@ public class Employe {
 
 	public void addPoste(Poste p){
 		postes.add(p);
-	}
-	
+		p.setEmp(this);
+	}	
+
 	public Email getEmail() {
 		return email;
 	}
+
 	public void setEmail(Email email) {
 		this.email = email;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -77,14 +83,6 @@ public class Employe {
 		this.telephone = telephone;
 	}
 
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
 	public Date getEntree() {
 		return entree;
 	}
@@ -100,7 +98,14 @@ public class Employe {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
-	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	
 }
 

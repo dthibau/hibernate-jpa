@@ -1,107 +1,43 @@
 package formation.hib.tp9.tests;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-
-import junit.framework.TestCase;
-
-import org.hibernate.CacheMode;
-import org.hibernate.Session;
-import org.hibernate.ejb.HibernateEntityManager;
+import javax.persistence.RollbackException;
 
 import formation.hib.tp9.dao.DBHelper;
-import formation.hib.tp9.metier.Departement;
+import formation.hib.tp9.metier.Employe;
+import junit.framework.TestCase;
 
 public class TP9_1Tests extends TestCase {
 	
-	private void _printCacheRegionStatistiques(String regionName) {
-		Map cacheEntries = ((org.hibernate.ejb.EntityManagerFactoryImpl)DBHelper.getFactory()).getSessionFactory().getStatistics()
-				.getSecondLevelCacheStatistics(regionName)
-				.getEntries();
-		System.out.println(cacheEntries);
-	}
-	// Récupérer tous les noms des employés et des départements en une seule requéte
-	public void testCacheDepartement() throws Exception{
+	public void testOptimiste() throws Exception{
+		System.out.println("\nCU : Consulter la liste des noms des employés et départements");
+		System.out
+				.println("1 - L'utilisateur demande à voir la liste des noms de tous les employés et départements");
+		System.out.println("2 - Le systéme affiche la liste");
+		EntityManager em1 = DBHelper.getFactory().createEntityManager();
+		EntityTransaction tx1 = em1.getTransaction();
+		tx1.begin();
+		EntityManager em2 = DBHelper.getFactory().createEntityManager();
+		EntityTransaction tx2 = em2.getTransaction();
+		tx2.begin();
 
-		// Chargement du Department dans le cache 
-		EntityManager em = DBHelper.getFactory().createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		Departement d = (Departement)em.find(Departement.class, new Long(1));
-		tx.commit();
-		em.close();
-		
-		_printCacheRegionStatistiques("Departement");
-
-		// L'accès à Département ne doit pas provoquer de requête SELECT
-		em = DBHelper.getFactory().createEntityManager();
-		tx = em.getTransaction();
-		tx.begin();
-		d = (Departement)em.find(Departement.class, new Long(1));
-		tx.commit();
-		em.close();
-		
-		// Mise à jour du département => Invalidation du cache
-		em = DBHelper.getFactory().createEntityManager();
-		Session session = ((HibernateEntityManager)em).getSession();
-		System.out.println(session.getCacheMode());
-		tx = em.getTransaction();
-		tx.begin();
-
-		d = (Departement)em.find(Departement.class, new Long(1));
-		d.setNom(d.getNom()+"X");
-		tx.commit();
-		em.close();
-		
-		_printCacheRegionStatistiques("Departement");
-		
-		// Le cache a été invalidé => rechargement du département dans le cache
-		em = DBHelper.getFactory().createEntityManager();
-		tx = em.getTransaction();
-		tx.begin();
-		d = (Departement)em.find(Departement.class, new Long(1));
-		System.out.println("Departement :"+d.getNom());
-		tx.commit();
-		em.close();
-		_printCacheRegionStatistiques("Departement");
-		
-		// En mode PUT, la session ne lit pas dans le cache
-		HibernateEntityManager hem = (HibernateEntityManager) DBHelper
-				.getFactory().createEntityManager();
-		session = hem.getSession();
-		session.setCacheMode(CacheMode.PUT);
-		tx = hem.getTransaction();
-		tx.begin();
-
-		d = (Departement)session.load(Departement.class, new Long(1));
-		System.out.println("Departement :"+d.getNom());
-		tx.commit();
-		hem.close();
-		_printCacheRegionStatistiques("Departement");
-	}
-
-	public void testCacheQuery() throws Exception{
-
-		EntityManager em = DBHelper.getFactory().createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		Query q = em.createNamedQuery("grandDepartement");
-		List<Departement> depts = (List<Departement>)q.getResultList();
-		tx.commit();
-		em.close();
-		System.out.println("Departements :"+depts.size());
-		em = DBHelper.getFactory().createEntityManager();
-		tx = em.getTransaction();
-		tx.begin();
-		q = em.createNamedQuery("grandDepartement");
-		depts = (List<Departement>)q.getResultList();
-		tx.commit();
-		em.close();
-		System.out.println("Departements :"+depts.size());
+		Employe e1 = (Employe)em1.find(Employe.class, new Long(1));
+		Employe e2 = (Employe)em2.find(Employe.class, new Long(1));
+		System.out.println("égalité en base ? :" +(e1.getId().equals(e2.getId())));
+		e1.setTelephone("O6"+e1.getTelephone());
+		e2.setTelephone("01"+e2.getTelephone());
+		tx2.commit();
+		em2.close();
+		try {
+			tx1.commit();
+			em1.close();
+			assertTrue(false);
+		} catch ( RollbackException e) {
+			System.out.println("Problème de concurrence" +e );
+//			e.printStackTrace();
+		}
 
 	}
+
 }

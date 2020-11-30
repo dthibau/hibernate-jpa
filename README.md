@@ -1,6 +1,4 @@
-# hibernate-jpa
-
-Formation Hibernate JPA 
+# Formation Hibernate JPA 
 
 Les slides sont les fichiers PDFs à la racine
 

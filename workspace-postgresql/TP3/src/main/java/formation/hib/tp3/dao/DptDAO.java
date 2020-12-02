@@ -19,15 +19,17 @@ public class DptDAO {
 	public Set<Employe> getEmployesDe(String nom) throws DAOException {
 		Set<Employe> ret = null;
 		EntityManager entityManager = DBHelper.getFactory().createEntityManager();
-		EntityTransaction tx = null;
-
+		EntityTransaction tx = entityManager.getTransaction();
+		
 		try {
-
+			tx.begin();
 			// A COMPLETER
 			Query q = entityManager.createQuery(SelectDptHQL);
 			q.setParameter(Nom, nom);
 			Departement d = (Departement)q.getSingleResult();
 			ret = d.getEmployes();
+			
+			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
 				try {
@@ -97,8 +99,7 @@ public class DptDAO {
 
 		try {
 			// A COMPLETER
-			tx.begin();
-			
+			tx.begin();		
 			d.integreEmploye(emp);
 			entityManager.merge(d);
 			tx.commit();

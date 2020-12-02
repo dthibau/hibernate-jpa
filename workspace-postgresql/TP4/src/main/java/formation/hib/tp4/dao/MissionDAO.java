@@ -1,6 +1,5 @@
 package formation.hib.tp4.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;

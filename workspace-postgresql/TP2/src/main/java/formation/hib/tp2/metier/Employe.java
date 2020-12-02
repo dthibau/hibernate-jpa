@@ -66,4 +66,9 @@ public class Employe {
 		this.entree = entree;
 	}
 
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", nom=" + nom + ", email=" + email + ", telephone=" + telephone + "]";
+	}
+
 }

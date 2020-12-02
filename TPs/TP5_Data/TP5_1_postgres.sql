@@ -44,7 +44,7 @@ CREATE TABLE tmission (
   ID bigserial primary key,
   libelle varchar(200) default NULL,
   debut date default NULL,
-  fin date default NULL,
+  fin date default NULL
 ) ;
 
 

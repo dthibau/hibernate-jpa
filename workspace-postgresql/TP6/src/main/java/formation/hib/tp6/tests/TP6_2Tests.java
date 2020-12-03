@@ -46,7 +46,7 @@ public class TP6_2Tests extends TestCase {
 		EntityManager em = DBHelper.getFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Forfait f = em.find(Forfait.class, new Long(3));
+		Forfait f = em.find(Forfait.class, 3l);
 		Tache t0 = f.getTaches().values().iterator().next();
 		t0.setCharge(1000);
 		tx.commit();
@@ -55,7 +55,7 @@ public class TP6_2Tests extends TestCase {
 		em = DBHelper.getFactory().createEntityManager();
 		tx = em.getTransaction();
 		tx.begin();
-		f = em.find(Forfait.class, new Long(3));
+		f = em.find(Forfait.class, 3l);
 		t0 = f.getTaches().values().iterator().next();
 		assertEquals(1000, t0.getCharge());
 		tx.commit();
@@ -128,7 +128,7 @@ public class TP6_2Tests extends TestCase {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Forfait f = new Forfait();
-		f.setClient(em.find(Client.class, new Long(1)));
+		f.setClient(em.find(Client.class, 1l));
 		f.setLibelle("libelle");
 		f.setProjet("New project");
 		Tache t0 = new Tache();

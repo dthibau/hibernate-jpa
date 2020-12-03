@@ -1,5 +1,6 @@
 package formation.hib.tp4.tests;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -7,8 +8,6 @@ import java.util.List;
 import formation.hib.tp4.dao.MissionDAO;
 import formation.hib.tp4.metier.Mission;
 import formation.hib.tp4.metier.Regie;
-
-
 import junit.framework.TestCase;
 
 public class TP4Tests extends TestCase {
@@ -47,18 +46,27 @@ public class TP4Tests extends TestCase {
 		System.out.println("2 - L'utilisateur fournit les libelle, date de début, de fin et le taux\n"+
 				 " ['Conseil Banquaire','2004-08-14','2005-03-15','10']");
 		System.out.println("3 - Le systéme crée une nouvelle régie");
-		//TODO Créer une nouvelle régie et rendez la persistente
 		
-		//TODO Vérifier qu'une nouvelle mission a bien été insérée
+		MissionDAO dao = new MissionDAO();
+		
+		int initialSize = dao.getAllMissionsDeType(Regie.class).size();
+		
+		Regie r = new Regie();
+		r.setLibelle("Conseil Banquaire");
+		r.setTaux(10);
+		r.setDebut(LocalDate.now());
+		r.setFin(LocalDate.now());
+		
+		dao.creerMission(r);
+		
+		List<Mission> lMission = dao.getAllMissions();
+		
+		lMission.stream().forEach(System.out::println);
+
+		assertEquals(initialSize+1, dao.getAllMissionsDeType(Regie.class).size());
 		
 	}
 	
-	private Date computeDate(int day, int month,int year){
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.DAY_OF_MONTH,day);
-		c.set(Calendar.MONTH,month - 1);
-		c.set(Calendar.YEAR,year);
-		return c.getTime();
-	}
+
 	
 }

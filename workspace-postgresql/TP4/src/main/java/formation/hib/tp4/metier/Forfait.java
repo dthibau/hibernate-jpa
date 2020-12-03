@@ -24,5 +24,6 @@ public class Forfait extends Mission {
 	public void setProjet(String projet) {
 		this.projet = projet;
 	}
+
 	
 }

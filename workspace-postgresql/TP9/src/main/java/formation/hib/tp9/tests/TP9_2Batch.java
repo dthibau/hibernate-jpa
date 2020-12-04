@@ -41,18 +41,17 @@ public class TP9_2Batch {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		session.setCacheMode(CacheMode.IGNORE);
+		session.setJdbcBatchSize( 25 );
 		for ( int i=0; i< 1000000; i++) {
 			Client c = new Client();
 			c.setNom("DummyClient");
 			em.persist(c);
 			if ( i % 25 == 0 ) { //20, same as the JDBC batch size
 		        //flush a batch of inserts and release memory:
-		        em.flush();
+//		        em.flush();
 		        em.clear();
-		    }
-			
-		}
-		
+		    }	
+		}		
 		tx.commit();
 		em.close();
 		System.out.println(System.currentTimeMillis()-ts +"ms");
@@ -67,6 +66,7 @@ public class TP9_2Batch {
 		EntityManager em = DBHelper.getFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		Session session = em.unwrap( Session.class );
+		session.setJdbcBatchSize( 10 );
 
 		tx.begin();
 		ScrollableResults scrollableResults = session

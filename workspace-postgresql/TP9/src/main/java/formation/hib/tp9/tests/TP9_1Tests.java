@@ -38,6 +38,7 @@ public class TP9_1Tests extends TestCase {
 		} catch ( RollbackException e) {
 			System.out.println("Problème de concurrence" +e );
 //			e.printStackTrace();
+			em1.close();
 		}
 		
 		_printStatistics();

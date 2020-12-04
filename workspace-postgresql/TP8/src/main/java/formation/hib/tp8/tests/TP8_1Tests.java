@@ -2,6 +2,7 @@ package formation.hib.tp8.tests;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.LockModeType;
 import javax.persistence.RollbackException;
 
 import formation.hib.tp8.dao.DBHelper;
@@ -22,8 +23,8 @@ public class TP8_1Tests extends TestCase {
 		EntityTransaction tx2 = em2.getTransaction();
 		tx2.begin();
 
-		Employe e1 = (Employe)em1.find(Employe.class, new Long(1));
-		Employe e2 = (Employe)em2.find(Employe.class, new Long(1));
+		Employe e1 = (Employe)em1.find(Employe.class, 1l);
+		Employe e2 = (Employe)em2.find(Employe.class, 1l);
 		System.out.println("égalité en base ? :" +(e1.getId().equals(e2.getId())));
 		e1.setTelephone("O6"+e1.getTelephone());
 		e2.setTelephone("01"+e2.getTelephone());
@@ -38,6 +39,38 @@ public class TP8_1Tests extends TestCase {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void testPessimiste() throws Exception{
+		System.out.println("\nCU : Consulter la liste des noms des employés et départements");
+		System.out
+				.println("1 - L'utilisateur demande à voir la liste des noms de tous les employés et départements");
+		System.out.println("2 - Le systéme affiche la liste");
+		EntityManager em1 = DBHelper.getFactory().createEntityManager();
+		EntityTransaction tx1 = em1.getTransaction();
+		tx1.begin();
+		EntityManager em2 = DBHelper.getFactory().createEntityManager();
+		EntityTransaction tx2 = em2.getTransaction();
+		tx2.begin();
+	
+		Employe e1 = (Employe)em1.find(Employe.class, 1l, LockModeType.PESSIMISTIC_READ);
+		Employe e2 = (Employe)em2.find(Employe.class, 1l, LockModeType.PESSIMISTIC_READ);
+		
+		System.out.println("égalité en base ? :" +(e1.getId().equals(e2.getId())));
+		e1.setTelephone("O6"+e1.getTelephone());
+		e2.setTelephone("01"+e2.getTelephone());
+
+		tx2.commit();
+		em2.close();
+		try {
+			tx1.commit();
+			em1.close();
+			assertTrue(false);
+		} catch ( RollbackException e) {
+			System.out.println("Problème de concurrence" +e );
+			e.printStackTrace();
+		}
+	
 	}
 
 }

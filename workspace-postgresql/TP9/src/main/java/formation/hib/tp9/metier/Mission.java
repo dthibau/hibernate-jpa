@@ -18,13 +18,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name="tmission")
 @Inheritance(strategy=InheritanceType.JOINED)
-@Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Mission")
+//@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Mission")
 public class Mission {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

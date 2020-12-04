@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
@@ -25,6 +26,7 @@ public class Forfait extends Mission {
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name="IDFORFAIT")
 	@MapKey(name="libelle")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	Map<String,Tache> taches = new HashMap<>();
 
 

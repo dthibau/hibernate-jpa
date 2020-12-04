@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -38,9 +37,8 @@ public class TP7_3Tests extends TestCase {
 		
 		cq.select(root).where(cb.lt(root.get("charge"),3));
 		
-		Query hqlQuery = em.createQuery(cq);
+		TypedQuery<Poste> hqlQuery = em.createQuery(cq);
 		
-		@SuppressWarnings("unchecked")
 		List<Poste> l =  (List<Poste>)hqlQuery.getResultList();
 		for (Poste p : l) {
 			System.out.println(p.getLibelle() + "==> " + p.getEmp().getNom() + " pour " + p.getMission().getLibelle());
@@ -65,12 +63,9 @@ public class TP7_3Tests extends TestCase {
 				em.getEntityGraph("departement-with-employes-graph");
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Departement> cq = cb.createQuery(Departement.class);
-		Root<Departement> root = cq.from(Departement.class);
 		TypedQuery<Departement> typedQuery = em.createQuery(cq);
 		typedQuery.setHint("javax.persistence.loadgraph", entityGraph);
-		
-		
-		@SuppressWarnings("unchecked")
+				
 		List<Departement> departements =  typedQuery.getResultList();
 		tx.commit();
 		em.close();

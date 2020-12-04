@@ -42,9 +42,11 @@ public class TP7_2Test extends TestCase {
 				for (Employe e : d.getEmployes()) {
 					System.out.println("\t[Employé :" + e.getNom() + "]");
 				}
+				assert false;
 			} catch (LazyInitializationException e) {
 				System.out.println("LAZY EXCEPTION");
 			}
+			
 		}
 	}
 
@@ -58,8 +60,8 @@ public class TP7_2Test extends TestCase {
 		Query hqlQuery = em.createQuery("from Departement ");
 
 		List<Departement> departements = hqlQuery.getResultList();
-		for (Departement d : departements)
-			Hibernate.initialize(d.getEmployes());
+		departements.stream().forEach(d -> Hibernate.initialize(d.getEmployes()));
+
 		assertNotNull(departements);
 		tx.commit();
 		em.close();
@@ -128,8 +130,6 @@ public class TP7_2Test extends TestCase {
 		EntityManager em = DBHelper.getFactory().createEntityManager();
 		EntityGraph entityGraph =
 				em.getEntityGraph("departement-with-employes-graph");
-		Map<String, Object> properties = new HashMap<>();
-		properties.put("javax.persistence.fetchgraph", entityGraph);
 		
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();

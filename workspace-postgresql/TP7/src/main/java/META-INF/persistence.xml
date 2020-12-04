@@ -5,7 +5,7 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" 
              version="1.0">
              
-   <persistence-unit name="ssii">
+   <persistence-unit name="ssii" transaction-type="RESOURCE_LOCAL">
       <properties>
       	<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 		<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5434/ssii"/>

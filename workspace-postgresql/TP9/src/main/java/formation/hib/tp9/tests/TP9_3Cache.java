@@ -48,6 +48,7 @@ public class TP9_3Cache extends TestCase {
 
 		tx.commit();
 		em.close();
+		_printCacheRegionStatistiques("Mission");
 	}
 
 	// Show Use of cache
@@ -58,9 +59,13 @@ public class TP9_3Cache extends TestCase {
 			Query hqlQuery = em.createQuery("from Forfait");
 			@SuppressWarnings("unchecked")
 			Forfait oneForfait = ((List<Forfait>) hqlQuery.getResultList()).get(0);
+			System.out.println("There are " + oneForfait.getTaches().size() + " taches");
+
 
 			tx.commit();
 			em.close();
+
+			_printCacheRegionStatistiques("Mission");
 
 			// Acess to tache when session is closed
 			em = DBHelper.getFactory().createEntityManager();
@@ -97,11 +102,13 @@ public class TP9_3Cache extends TestCase {
 			tx.commit();
 			em.close();
 
+			_printCacheRegionStatistiques("Mission");
+
 			// Previous forfait is in cache
 			em = DBHelper.getFactory().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			System.out.println("There should be no SQL statements after ME");
+			System.out.println("There should be SQL statements after ME");
 			Forfait newForfait = em.find(Forfait.class, f.getId());
 
 			tx.commit();
@@ -160,11 +167,12 @@ public class TP9_3Cache extends TestCase {
 
 			// We want to ignore the cache
 			em = DBHelper.getFactory().createEntityManager();
-			((Session) em).setCacheMode(CacheMode.GET);
+			Session session = em.unwrap(Session.class);
+			session.setCacheMode(CacheMode.IGNORE);
 			tx = em.getTransaction();
 			tx.begin();
 			System.out.println("I DO NOT CARE ABOUT CACHE");
-			oneForfait = em.find(Forfait.class, oneForfait.getId());
+			oneForfait = session.get(Forfait.class, oneForfait.getId());
 			long ts = System.currentTimeMillis();
 			oneForfait.setProjet(""+ts);
 			

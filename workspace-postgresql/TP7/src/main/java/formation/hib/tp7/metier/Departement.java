@@ -3,7 +3,9 @@ package formation.hib.tp7.metier;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +34,7 @@ public class Departement {
 	private Long id;
 	private String nom;
 	private String code;
+	
 	@OneToMany
 	@JoinColumn(name = "IDDpt")
 	private Set<Employe> employes = new HashSet<Employe>();

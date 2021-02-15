@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import formation.hib.tp1.dao.derby.DerbyDBHelper;
 import formation.hib.tp1.metier.Employe;
 
 /**
@@ -35,7 +35,8 @@ public class DptDAO {
 		PreparedStatement ps  = null;
 		ResultSet rs  = null;
 		try {
-			connection = DBHelper.getConnection();
+//			connection = DBHelper.getConnection();
+			connection = DerbyDBHelper.getConnection();
 			ps = connection.prepareStatement(SelectDptStmt);
 			ps.setString(1,nom);
 			rs = ps.executeQuery();

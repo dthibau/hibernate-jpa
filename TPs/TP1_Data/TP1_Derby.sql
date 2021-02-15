@@ -1,4 +1,4 @@
-CONNECT 'jdbc:derby:vignerons';
+CONNECT 'jdbc:derby:ssii';
 
 DROP TABLE tdpt;
 CREATE TABLE tdpt (

@@ -1,4 +1,4 @@
-CONNECT 'jdbc:derby:ssii';
+CONNECT 'jdbc:derby://localhost/ssii';
 
 DROP TABLE tdpt;
 CREATE TABLE tdpt (

@@ -1,10 +1,12 @@
 package formation.hib.tp5.metier;
 
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tforfait")
+@PrimaryKeyJoinColumn(name = "IDFORFAIT", referencedColumnName = "ID")
 public class Forfait extends Mission {
 	private int prix;
 

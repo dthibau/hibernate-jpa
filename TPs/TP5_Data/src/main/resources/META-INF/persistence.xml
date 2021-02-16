@@ -7,14 +7,14 @@
              
    <persistence-unit name="ssii">
       <properties>
-      	<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-		<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5434/ssii"/>
-		<property name="javax.persistence.jdbc.user" value="postgres"/>
-		<property name="javax.persistence.jdbc.password" value="postgres"/>
-		
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5434/f_ssii"/>
+<property name="javax.persistence.jdbc.user" value="postgres"/>
+<property name="javax.persistence.jdbc.password" value="postgres"/>
+
       <!-- Ajouter les propriétés Hibernate nécessaires -->
-         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-         <property name="hibernate.hbm2ddl.auto" value="update"/>
+<!--          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/> -->
+         <property name="hibernate.hbm2ddl.auto" value="validate"/>
          <property name="hibernate.show_sql" value="true"/>
          <property name="hibernate.format_sql" value="false"/>      
       </properties>

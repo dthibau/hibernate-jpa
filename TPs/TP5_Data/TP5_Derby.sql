@@ -58,7 +58,7 @@ CREATE TABLE tposte (
   ID BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   charge float default NULL,
   libelle varchar(50) default NULL,
-  description text,
+  description varchar(500),
   IdEmp bigint default NULL,
   idMission bigint default NULL
 ) ;

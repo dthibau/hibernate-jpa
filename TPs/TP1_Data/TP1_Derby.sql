@@ -2,7 +2,7 @@ CONNECT 'jdbc:derby://localhost/ssii';
 
 DROP TABLE tdpt;
 CREATE TABLE tdpt (
-  ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  ID BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   nom varchar(30) default NULL,
   code varchar(4) default NULL
 ) ;
@@ -13,7 +13,7 @@ INSERT INTO tdpt (nom,code) VALUES('Administration','adm');
 
 DROP TABLE temploye;
 CREATE TABLE temploye (
-  ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  ID BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   nom varchar(40) NOT NULL default '',
   email varchar(30) default NULL,
   tel varchar(30) default NULL,

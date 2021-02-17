@@ -25,7 +25,7 @@ public class TP5_2Tests extends TestCase {
 		List<Poste> lPos = (List<Poste>) hqlQuery.getResultList();
 		for (Poste p : lPos) {
 			System.out.println(p.getId() + ") " + p.getLibelle() + " emp -> "
-					+ p.getEmp().getNom() + " mission -> " + p.getMission().getLibelle());
+					+ p.getEmploye().getNom() + " mission -> " + p.getMission().getLibelle());
 
 		}
 		assertNotNull(lPos);

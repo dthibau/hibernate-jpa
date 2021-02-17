@@ -7,7 +7,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tformation")
-@PrimaryKeyJoinColumn(name = "IDFormation", referencedColumnName = "ID")
 public class Formation extends Mission {
 	private String cours;
 	@Column(name="IDType")

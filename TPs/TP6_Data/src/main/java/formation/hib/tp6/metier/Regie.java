@@ -6,7 +6,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tregie")
-@PrimaryKeyJoinColumn(name = "IDRegie", referencedColumnName = "ID")
 public class Regie extends Mission {
 	private int taux;
 

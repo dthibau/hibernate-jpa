@@ -1,6 +1,7 @@
 
-
+DROP TABLE IF EXISTS temploye;
 DROP TABLE IF EXISTS tdpt;
+
 CREATE TABLE tdpt (
   ID BIGSERIAL primary key ,
   nom varchar(30) default NULL,
@@ -12,7 +13,7 @@ INSERT INTO tdpt (nom,code) VALUES('E-Technologies','etch');
 INSERT INTO tdpt (nom,code) VALUES('Services tertiaires','ster');
 INSERT INTO tdpt (nom,code) VALUES('Administration','adm');
 
-DROP TABLE IF EXISTS temploye;
+
 CREATE TABLE temploye (
   Id BIGSERIAL primary key ,
   nom varchar(40) NOT NULL default '',

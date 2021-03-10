@@ -19,7 +19,8 @@ public class Poste {
 	@ManyToOne @JoinColumn(name="IdMission")
 	private Mission mission;
 	private String libelle;
-	@Lob
+	//@Lob
+        @Column(columnDefinition = "clob")
 	private String description;
 	private float charge; // nb jours / semaine
 	

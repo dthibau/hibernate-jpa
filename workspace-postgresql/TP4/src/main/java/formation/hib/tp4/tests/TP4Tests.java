@@ -54,8 +54,8 @@ public class TP4Tests extends TestCase {
 		Regie r = new Regie();
 		r.setLibelle("Conseil Banquaire");
 		r.setTaux(10);
-		r.setDebut(LocalDate.now());
-		r.setFin(LocalDate.now());
+		r.setDebut(LocalDate.of(2020, 8, 14));
+		r.setFin(LocalDate.of(2021, 3, 15));
 		
 		dao.creerMission(r);
 		

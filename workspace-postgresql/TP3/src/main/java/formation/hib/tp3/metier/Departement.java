@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 @Table(name = "tdpt")
@@ -20,7 +22,9 @@ public class Departement {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty
 	private String nom;
+	@NotEmpty
 	private String code;
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER)

@@ -45,7 +45,6 @@ INSERT INTO tmission (libelle,debut,fin) VALUES('Forfait ILO','2004-04-01','2005
 DROP TABLE IF EXISTS tformation;
 CREATE TABLE tformation (
   cours varchar(50) default '0',
-  IDType int default NULL,
   ID bigint default NULL
 ) ;
 

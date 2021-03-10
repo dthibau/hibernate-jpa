@@ -48,7 +48,7 @@ CREATE TABLE tformation (
   ID bigint default NULL
 ) ;
 
-INSERT INTO tformation VALUES('Modélisation Objet','2','1');
+INSERT INTO tformation VALUES('Modélisation Objet','2');
 
 
 

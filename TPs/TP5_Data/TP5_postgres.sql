@@ -40,7 +40,6 @@ CREATE TABLE tforfait (
 
 CREATE TABLE tformation (
   cours varchar(50) default '0',
-  IDType int default NULL,
   ID bigint default NULL
 ) ;
 
@@ -93,7 +92,7 @@ INSERT INTO tmission (libelle, debut, fin, IDClient) VALUES('Audit Mthode projet
 INSERT INTO tmission (libelle, debut, fin, IDClient) VALUES('Forfait ILO','2004-04-01','2005-01-15','2');
 
 INSERT INTO tforfait VALUES(3,'10000','ILO');
-INSERT INTO tformation VALUES('Modélisation Objet',2,1);
+INSERT INTO tformation VALUES('Modélisation Objet',2);
 
 INSERT INTO tregie VALUES(7,2);
 

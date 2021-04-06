@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tforfait")
+@PrimaryKeyJoinColumn(name = "IDFORFAIT", referencedColumnName = "ID")
 public class Forfait extends Mission {
 	private int prix;
 

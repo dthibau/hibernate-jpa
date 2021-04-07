@@ -26,7 +26,7 @@ public class DptDAO {
 			@SuppressWarnings("unchecked")
 			Query<Departement> q = session.createQuery(SelectDptHQL);
 			q.setParameter(Nom, nom);
-			Departement d = q.getSingleResult();
+			Departement d = q.uniqueResult();
 			ret =  d.getEmployes();
 			tx.commit();
 		} catch (Exception e) {
@@ -95,10 +95,10 @@ public class DptDAO {
 		try {
 			tx = session.beginTransaction();
 			//TODO intégrer l'employé au département
-			d.integreEmploye(emp);
-			session.merge(d);
-//			d = session.load(Departement.class, d.getId());
 //			d.integreEmploye(emp);
+//			session.merge(d);
+			d = session.load(Departement.class, d.getId());
+			d.integreEmploye(emp);
 			
 			tx.commit();
 		} catch (Exception e) {

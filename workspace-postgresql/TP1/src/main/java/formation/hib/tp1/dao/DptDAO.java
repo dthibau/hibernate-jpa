@@ -35,8 +35,8 @@ public class DptDAO {
 		PreparedStatement ps  = null;
 		ResultSet rs  = null;
 		try {
-//			connection = DBHelper.getConnection();
-			connection = DerbyDBHelper.getConnection();
+			connection = DBHelper.getConnection();
+//			connection = DerbyDBHelper.getConnection();
 			ps = connection.prepareStatement(SelectDptStmt);
 			ps.setString(1,nom);
 			rs = ps.executeQuery();

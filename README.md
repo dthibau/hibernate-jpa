@@ -11,7 +11,7 @@ Dans <b>workspace-postgresql</b>, se trouvent les solutions des ateliers pour un
 
 
 
-
+<br/><br/>
 Copyright (C)  2021  David THIBAU.
 
     Permission is granted to copy, distribute and/or modify this document

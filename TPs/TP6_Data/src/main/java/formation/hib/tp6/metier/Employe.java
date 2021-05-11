@@ -29,7 +29,7 @@ public class Employe {
 	
 	@Column(name="tel")
 	private String telephone;
-	@OneToMany(mappedBy="emp")
+	@OneToMany(mappedBy="employe")
 	private Set<Poste> postes = new HashSet<Poste>();
 	
 	public Set<Poste> getPostes() {

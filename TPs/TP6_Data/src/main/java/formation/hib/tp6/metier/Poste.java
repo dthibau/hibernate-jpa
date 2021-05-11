@@ -1,11 +1,11 @@
 package formation.hib.tp6.metier;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,7 +15,7 @@ public class Poste {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne @JoinColumn(name="IdEmp")
-	private Employe emp;
+	private Employe employe;
 	@ManyToOne @JoinColumn(name="IdMission")
 	private Mission mission;
 	private String libelle;
@@ -27,8 +27,8 @@ public class Poste {
 	protected Poste(){}
 	
 	public Poste(Employe e, Mission m){
-		emp = e;
-		emp.addPoste(this);
+		employe = e;
+		employe.addPoste(this);
 		mission = m;
 	}
 	
@@ -45,11 +45,11 @@ public class Poste {
 		this.description = description;
 	}
 	
-	public Employe getEmp() {
-		return emp;
+	public Employe getEmploye() {
+		return employe;
 	}
-	public void setEmp(Employe emp) {
-		this.emp = emp;
+	public void setEmploye(Employe emp) {
+		this.employe = emp;
 	}
 	public Long getId() {
 		return id;

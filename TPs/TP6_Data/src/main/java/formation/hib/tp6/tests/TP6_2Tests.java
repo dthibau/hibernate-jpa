@@ -47,7 +47,7 @@ public class TP6_2Tests extends TestCase {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Forfait f = em.find(Forfait.class, new Long(3));
-		Tache t0 = f.getTaches().get(0);
+		Tache t0 = 
 		t0.setCharge(1000);
 		tx.commit();
 		em.close();
@@ -56,7 +56,7 @@ public class TP6_2Tests extends TestCase {
 		tx = em.getTransaction();
 		tx.begin();
 		f = em.find(Forfait.class, new Long(3));
-		t0 = f.getTaches().get(0);
+		t0 = 
 		assertEquals(1000, t0.getCharge());
 		tx.commit();
 		em.close();
@@ -98,7 +98,7 @@ public class TP6_2Tests extends TestCase {
 		tx.begin();
 		Forfait f = em.find(Forfait.class, new Long(3));
 		// A COMPLETER
-		// Enlever la 4ème tâche
+		// Enlever une tâche
 		
 		tx.commit();
 		em.close();
@@ -131,7 +131,7 @@ public class TP6_2Tests extends TestCase {
 		em = DBHelper.getFactory().createEntityManager();
 		tx = em.getTransaction();
 		tx.begin();
-		f = em.find(Forfait.class, new Long(4));
+		f = em.find(Forfait.class, f.getId());
 		assertEquals(2, f.getTaches().size());
 		tx.commit();
 		em.close();

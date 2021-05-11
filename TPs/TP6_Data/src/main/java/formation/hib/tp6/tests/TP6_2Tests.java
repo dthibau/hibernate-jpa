@@ -28,7 +28,7 @@ public class TP6_2Tests extends TestCase {
 		List<Forfait> forfaits = (List<Forfait>) hqlQuery.getResultList();
 		for (Forfait f : forfaits) {
 			System.out.println(f.getId() + ") " + f.getLibelle());
-			for ( Tache t : f.getTaches() ) {
+			for ( Tache t : f.getTaches().values() ) {
 				System.out.println("\t" + t.getId() + ") " + t.getLibelle() + " Charge :" + t.getCharge());
 			}
 		}
@@ -47,7 +47,7 @@ public class TP6_2Tests extends TestCase {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Forfait f = em.find(Forfait.class, new Long(3));
-		Tache t0 = 
+		Tache t0 = f.getTaches().values().iterator().next();
 		t0.setCharge(1000);
 		tx.commit();
 		em.close();

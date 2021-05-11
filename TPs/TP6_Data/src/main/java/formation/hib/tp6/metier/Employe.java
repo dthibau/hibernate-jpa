@@ -29,6 +29,16 @@ public class Employe {
 	
 	@Column(name="tel")
 	private String telephone;
+	
+	private String email;
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	@OneToMany(mappedBy="employe")
 	private Set<Poste> postes = new HashSet<Poste>();
 	

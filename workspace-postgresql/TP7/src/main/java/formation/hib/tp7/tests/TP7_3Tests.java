@@ -8,11 +8,14 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import formation.hib.tp7.dao.DBHelper;
 import formation.hib.tp7.metier.Departement;
 import formation.hib.tp7.metier.Employe;
+import formation.hib.tp7.metier.Mission;
 import formation.hib.tp7.metier.Poste;
 import junit.framework.TestCase;
 
@@ -34,8 +37,12 @@ public class TP7_3Tests extends TestCase {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Poste> cq = cb.createQuery(Poste.class);
 		Root<Poste> root = cq.from(Poste.class);
+//		Join mission = root.join("mission", JoinType.LEFT);
+		
+//		cq.multiselect(root,mission).where(cb.lt(root.get("charge"),3));
 		
 		cq.select(root).where(cb.lt(root.get("charge"),3));
+
 		
 		TypedQuery<Poste> hqlQuery = em.createQuery(cq);
 		

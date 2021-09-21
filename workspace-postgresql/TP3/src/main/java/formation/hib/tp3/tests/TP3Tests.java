@@ -47,6 +47,7 @@ public class TP3Tests extends TestCase {
 		EntityManager em = DBHelper.getFactory().createEntityManager();
 		Employe marin = (Employe)em.find(Employe.class,3l);
 		Departement adm = (Departement)em.find(Departement.class, 3l);
+		em.close();
 		dao.integrateEmploye(marin, adm );
 		
 		Set<Employe> lemp = dao.getEmployesDe("Administration");

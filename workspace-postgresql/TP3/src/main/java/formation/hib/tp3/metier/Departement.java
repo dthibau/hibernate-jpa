@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
@@ -23,8 +26,11 @@ public class Departement {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty
+	@Size(max = 80)
 	private String nom;
 	@NotEmpty
+//	@Length(max = 5)
+	@Column(length = 5)
 	private String code;
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER)

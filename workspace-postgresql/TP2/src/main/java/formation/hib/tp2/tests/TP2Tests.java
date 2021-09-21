@@ -47,6 +47,7 @@ public class TP2Tests extends TestCase {
 		Session s = DBHelper.getFactory().openSession();
 		Employe marin = (Employe)s.get(Employe.class,3l);
 		Departement adm = (Departement)s.get(Departement.class, 3l);
+		s.close();
 		Set<Employe> lemp = dao.getEmployesDe("Administration");
 		
 		dao.integrateEmploye(marin, adm );

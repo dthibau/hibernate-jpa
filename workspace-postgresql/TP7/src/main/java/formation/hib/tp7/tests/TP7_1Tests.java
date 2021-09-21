@@ -24,8 +24,10 @@ public class TP7_1Tests extends TestCase {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		Query jpqlQuery = em.createQuery("select emp.nom,d.nom from Departement d left outer join d.employes emp"); 
-		
+//		Query jpqlQuery = em.createQuery("select emp.nom,d.nom from Departement d left outer join d.employes emp"); 
+
+		Query jpqlQuery = em.createQuery("select emp.nom,d.nom from Departement d right outer join d.employes emp"); 
+
 		@SuppressWarnings("unchecked")
 		List<Object[]> l =  (List<Object[]>)jpqlQuery.getResultList();
 		for (Object[] courant : l) {
@@ -162,6 +164,7 @@ public class TP7_1Tests extends TestCase {
 		tx.begin();
 
 		Query hqlQuery = em.createQuery("DELETE from Poste p where p in (select p2 from Poste p2 join p2.mission m where m.libelle = :libelle)");
+		
 		hqlQuery.setParameter("libelle", "Formation CASA");
 		
 		int deleteCount = hqlQuery.executeUpdate();

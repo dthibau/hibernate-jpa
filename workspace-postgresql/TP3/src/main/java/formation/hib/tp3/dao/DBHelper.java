@@ -12,14 +12,9 @@ public class DBHelper {
 	private static EntityManagerFactory factory = null;
 
 	static {
-		try {
 			// A compléter
 			factory = Persistence.createEntityManagerFactory("ssii");
-		} catch (HibernateException e) {
-			System.err
-					.println("problème d'obtention d'une entityManager factory Hibernate/JPA");
-			throw e;
-		}
+		
 	}
 
 	public static EntityManagerFactory getFactory() {

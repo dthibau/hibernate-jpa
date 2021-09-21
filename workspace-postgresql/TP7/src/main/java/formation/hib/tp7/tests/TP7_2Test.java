@@ -36,18 +36,16 @@ public class TP7_2Test extends TestCase {
 		em.close();
 
 		System.out.println("2 - Le système affiche tous les départements et leurs employés");
-		for (Departement d : departements) {
-			System.out.println("[Departement :" + d.getNom() + "]");
+		departements.stream().forEach(d -> {
 			try {
-				for (Employe e : d.getEmployes()) {
-					System.out.println("\t[Employé :" + e.getNom() + "]");
-				}
-				assert false;
+				d.getEmployes().stream().forEach(System.out::println);
+				fail("Exception non lancée");
 			} catch (LazyInitializationException e) {
 				System.out.println("LAZY EXCEPTION");
 			}
-			
-		}
+
+		});
+
 	}
 
 	public void testAvoidLazyWithInitialize() throws Exception {
@@ -90,12 +88,9 @@ public class TP7_2Test extends TestCase {
 		em.close();
 
 		System.out.println("2 - Le système affiche tous les départements et leurs employés");
-		for (Departement d : departements) {
-			System.out.println("[Departement :" + d.getNom() + "]");
-			for (Employe e : d.getEmployes()) {
-				System.out.println("\t[Employé :" + e.getNom() + "]");
-			}
-		}
+		departements.stream().forEach(d -> {
+				d.getEmployes().stream().forEach(System.out::println);
+			});
 	}
 
 	public void testAvoidLazyWithFetchProfile() throws Exception {
@@ -135,20 +130,26 @@ public class TP7_2Test extends TestCase {
 		tx.begin();
 
 		@SuppressWarnings("unchecked")
-		List<Departement> departements = em.createQuery("from Departement")
-				  .setHint("javax.persistence.fetchgraph", entityGraph)
-				  .getResultList();
-		assertNotNull(departements);
+//		List<Departement> departements = em.createQuery("from Departement")
+//				  .setHint("javax.persistence.fetchgraph", entityGraph)
+//				  .getResultList();
+//		assertNotNull(departements);
+		
+		Map<String,Object> properties = new HashMap<>();
+		properties.put("javax.persistence.fetchgraph", entityGraph);
+		Departement dep = em.find(Departement.class,1l,properties);
 		tx.commit();
 		em.close();
+		
+		System.out.println(dep.getEmployes());
 
 		System.out.println("2 - Le système affiche tous les départements et leurs employés");
-		for (Departement d : departements) {
-			System.out.println("[Departement :" + d.getNom() + "]");
-			for (Employe e : d.getEmployes()) {
-				System.out.println("\t[Employé :" + e.getNom() + "]");
-			}
-		}
+//		for (Departement d : departements) {
+//			System.out.println("[Departement :" + d.getNom() + "]");
+//			for (Employe e : d.getEmployes()) {
+//				System.out.println("\t[Employé :" + e.getNom() + "]");
+//			}
+//		}
 	}
 
 }

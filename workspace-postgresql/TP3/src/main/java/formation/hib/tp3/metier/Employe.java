@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,7 +17,7 @@ import org.hibernate.validator.constraints.Email;
 
 
 @Entity
-@Table(name="temploye")
+@Table(name="temploye", indexes = @Index(columnList = "email"))
 public class Employe {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
